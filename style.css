@@ -1,0 +1,594 @@
+/* Imports */
+@font-face{
+    font-family: 'Ubuntu-Medium';
+    src: url('./assets/fonts/Ubuntu-Medium.ttf') format('truetype');
+}
+
+@font-face{
+    font-family:'Ubuntu-Regular';
+    src:url('./assets/fonts/Ubuntu-Regular.ttf') format('truetype');
+}
+
+@font-face{
+    font-family:'Ubuntu-Bold';
+    src: url('./assets/fonts/Ubuntu-Medium.ttf') format('truetype');
+}
+
+/* Global */
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Ubuntu-Regular';
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2{
+    font-size: 1.75em;
+}
+
+h1, h2, h3, p{
+    margin: 0;
+}
+
+input:not([type="radio"]){
+    display: block;
+}
+
+button{
+    cursor: pointer;
+    color: white;
+    padding: 1em 1.5em;
+    border-radius: 0.5em;
+    border: none;
+    background: #003568;
+    font-weight: 600;
+}
+
+/* Container */
+.container{
+    position: relative;
+    width: 900px;
+    height: 600px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin: auto;
+    padding: 0.8em;
+    border-radius: 1em;
+}
+
+/*  Navigation */
+#sidebar{
+    background: url('assets/images/bg-sidebar-desktop.svg') no-repeat;
+    height: 100%;
+    width: 30%;
+    border-radius: 0.5em;
+}
+
+#navbar{
+    margin-top: 1rem;
+}
+
+.nav-item{
+    width: 86%;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em 0.5em;
+}
+
+.step-number{
+    color: white;
+    padding: 6px 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.step-description{
+    color: white;
+}
+
+.nav-item-title{
+    display: block;
+    text-transform: uppercase;
+    font-family: 'Ubuntu-Medium';
+    margin-top: 0.25em;
+}
+
+/* Multi-step form */
+#multi-step-form{
+    width: 70%;
+    position: relative;
+}
+
+/* Sections */
+.section{
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    left: 15%;
+    color: #003568;
+    display: none;
+    grid-template-rows: 26% 64% 10%;
+}
+
+.section-header{
+    padding-block: 2.2em;
+}
+
+.section-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.section-footer{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.section-title{
+    margin-bottom: 0.5em;
+}
+
+.section-description{
+    line-height: 1.5em;
+}
+
+.form-group label{
+    display: flex;
+    justify-content: space-between;
+    color: #003568;
+    margin-bottom: 0.25em;
+}
+
+.error{
+    display: none;
+    font-family: 'Ubuntu-Bold';
+    color: rgb(230, 2, 2);
+}
+
+/* Personal info */
+.form-group input{
+    width: 100%;
+    padding:1em;
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+}
+
+.form-group input:focus{
+    outline: 1px solid blue;
+}
+
+/* Select plan */
+.billing-plans{
+    display: grid;
+    grid-template-columns: repeat(3, 31%);
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 0.5em;
+}
+
+.billing-plan{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0.5em;
+    box-shadow:rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 1em;
+    height: 160px;
+}
+
+.billing-plan:hover{
+    transform: translateY(-10px);
+    transition: transform 0.3s ease-in;
+}
+
+.billing-details label{
+    font-family: 'Ubuntu-Bold';
+}
+
+.base-price{
+    color: gray;
+    margin-top: 0.3em;
+}
+
+.base-price-incentive{
+    font-size: 0.75em;
+    color: #003568;
+    margin-top: 0.3em;
+}
+
+input[name^="billing-option"]{
+    opacity: 0;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+}
+
+.billing-options{
+    background: rgb(248, 248, 248);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    border-radius: 0.5em;
+    padding: 0.5em;
+}
+
+.billing-monthly, .billing-yearly{
+    color: gray;
+}
+
+/* Toggle */
+.monthly-yearly-switch{
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.monthly-yearly-switch input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider{
+    position: absolute;
+    content: '';
+    inset: 0;
+    background: #003568;
+}
+
+.slider::before{
+    position: absolute;
+    cursor: pointer;
+    content:"";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background: white;
+    -webkit-transition: white;
+    transition: 0.4s;
+}
+
+input:checked + .slider::before{
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
+}
+
+.slider.round{
+    border-radius: 34px;
+}
+
+.slider.round::before{
+    border-radius: 50%;
+}
+
+.go-back-btn{
+    background: white;
+    color: gray;
+}
+
+/* Add-ons */
+.add-on{
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+    align-items: center;
+    border: 1px solid lightgray;
+    gap: 0.5em;
+    padding: 1em;
+    border-radius: 0.5em;
+}
+
+.add-on input{
+    min-height: 1.25em;
+}
+
+.add-on-type{
+    font-family: 'Ubuntu-Bold';
+}
+
+.add-on-description{
+    margin-top: 0.25em;
+    color: gray;
+}
+
+/* Summary */
+#summary-table{
+    padding: 1em;
+    border-radius: 0.5em;
+    background: rgb(248, 248, 248);
+}
+
+#summary-total{
+    padding-inline: 1.1em;
+}
+
+.table-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+}
+
+.change{
+    cursor: pointer;
+    display: block;
+    margin-top: 0.25em;
+    text-decoration: underline;
+}
+
+.change:hover{
+    color: blue;
+}
+
+.hr-line{
+    display: block;
+    width: calc(100% - 1em);
+    margin: 1.2em auto;
+    border-bottom: 1px solid lightgray;
+}
+
+#total{
+    font-family:'Ubuntu-Medium';
+    color: blue;
+    font-size: 1.25em;
+}
+
+#submit{
+    background: rgb(0, 0, 231);
+}
+
+/* Confirmation */
+.confirmation{
+    width: calc(70% - 1.6em);
+    height: calc(100% - 1.6em);
+    left: 30%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+}
+
+#thank-you{
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1em;
+}
+
+#confirmation-message{
+    max-width: 460px;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+/* Utilities */
+.outline-red{
+    outline: 1px solid rgb(230, 2, 2);
+}
+
+.fill{
+    background: lightblue;
+    color: black;
+}
+
+.dark-blue-highlight{
+    color: #003568;
+    font-weight: 600;
+}
+
+.color-gray{
+    color: gray;
+}
+
+.color-light-gray{
+    color: lightgray;
+}
+
+.visible{
+    display: grid;
+}
+
+.hide{
+    display: none;
+}
+
+.checked{
+    border: 1px solid blue;
+}
+
+/* Mobile responsiveness */
+@media(max-width: 550px){
+    h1, h2{
+        font-size: 1.5em;
+    }
+    button{
+        padding: 0.8em 1.2em;
+    }
+
+    .container{
+        background:rgb(248, 248, 248);
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        box-shadow: none;
+        padding: 0;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+
+    #sidebar{
+        position: fixed;
+        background: url('assets/images/bg-sidebar-mobile.svg') no-repeat;
+        height: auto;
+        background-size: cover;
+        width: 100%;
+        border-radius: 0;
+        height: 160px;
+    }
+
+    #navbar{
+        display: flex;
+        width: 50%;
+        margin-top: 1rem;
+        margin-inline: auto;
+    }
+
+    .nav-item{
+        display: flex;
+        justify-content: center;
+        padding: 1em 0;
+    }
+
+    .form-group label{
+        margin-bottom: 0.25em;
+    }
+
+    .nav-item span{
+        display: none;
+    }
+
+    .step-number{
+        padding: 9px 13px;
+        font-weight: 600;
+    }
+
+    #multi-step-form{
+        width: 100%;
+    }
+
+    .section{
+        width: 100%;
+        position: relative;
+        grid-template-rows: auto;
+        left: 0;
+        min-height: 100vh;
+    }
+
+    .section-header, .section-body{
+        width: 90%;
+        background: white;
+        margin-inline: auto;
+    }
+
+    .section-header{
+        align-self: end;
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        border-top: 1px solid lightgray;
+        border-right: 1px solid lightgray;
+        border-left: 1px solid lightgray;
+        padding: 2em 2em 1em 2em;
+    }
+
+    .section-body{
+        align-self: start;
+        border-bottom-left-radius: 0.5em;
+        border-bottom-right-radius: 0.5em;
+        justify-content: space-around;
+        border-right: 1px solid lightgray;
+        border-left: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+        padding: 0 2em 2em 2em;
+    }
+
+    .section-footer{
+        align-self: end;
+        width: 100%;
+        position: relative;
+        align-items: center;
+        background: white;
+        padding-block: 0.5em;
+    }
+
+    .section-footer button:first-child{
+        margin-right: 5%;
+    }
+
+    .go-back-btn{
+        margin-left: 5%;
+    }
+
+    #personal-info-header{
+        margin-top: 3em;
+    }
+
+    #select-plan-header{
+        margin-top: 5.70em;
+    }
+
+    #add-ons-header{
+        margin-top: 4em;
+    }
+
+    #summary-header{
+        margin-top: 3.3em;
+    }
+
+    .billing-plans{
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        row-gap: 1em;
+    }
+
+    .billing-plan{
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 1em;
+        height: 100%;
+        gap: 0.5em;
+    }
+
+    .add-on{
+        grid-template-columns: 10% auto 20%;
+        gap: 0.5em;
+        padding: 0.5em;
+    }
+
+    .add-on input{
+        min-height: 1.5em;
+    }
+
+    #total{
+        font-size: 1.1em;
+    }
+
+    .confirmation{
+        background: white;
+        width: 90%;
+        left: 0;
+        position: relative;
+        align-content: center;
+        margin-inline: auto;
+        padding: 4em;
+        border-radius: 0.5em;
+        margin-top: 6.2em;
+    }
+}
+
+
+
+
+
+
+

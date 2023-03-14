@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Multi-step form</title>
+  <script type="text/javascript" src="./src/script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div id="sidebar">
+      <!-- Navigation bar -->
+      <nav id="navbar">
+        <div class="nav-item">
+          <div class="step-number fill">1</div>
+          <div class="step-description">
+            <span class="color-light-gray">Step 1</span>
+            <br>
+            <span class="nav-item-title">Your Info</span>
+          </div>
+        </div>
+        <div class="nav-item">
+          <div class="step-number">2</div>
+          <div class="step-description">
+            <span class="color-light-gray">Step 2</span>
+            <br>
+            <span class="nav-item-title">Select Plan</span>
+          </div>
+        </div>
+        <div class="nav-item">
+          <div class="step-number">3</div>
+          <div class="step-description">
+            <span class="color-light-gray">Step 3 </span>
+            <br>
+            <span class="nav-item-title">Add-Ons</span>
+          </div>
+        </div>
+        <div class="nav-item">
+          <div class="step-number">4</div>
+          <div class="step-description">
+            <span class="color-light-gray">Step 4</span>
+            <br>
+            <span class="nav-item-title">Summary</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Multi-step form  -->
+    <form action="#" method="POST" id="multi-step-form" onsubmit="onSubmit(event)">
+      <!-- Personal information -->
+      <div class="section visible" id="personal-info">
+        <div class="section-header" id="personal-info-header">
+          <h1 class="section-title">Personal info</h1>
+          <p class="section-description color-gray">Please provide your name, email address, and phone number</p>
+        </div>
+        <div class="section-body">
+          <div class="form-group">
+            <label for="name">Name
+              <span class="error">This field is required</span>
+            </label>
+            <input id="name" type="text" placeholder="e.g. Stephen King" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">
+              Email address
+              <span class="error">This field is required</span>
+            </label>
+            <input id="email" type="email" placeholder="e.g. stephenking@lorem.com" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone-number">
+              Phone number
+              <span class="error">This field is required</span>
+            </label>
+            <input id="phone-number" type="text" placeholder="e.g +1 234 567 890" name='phone-number' required>
+          </div>
+        </div>
+        <div class="section-footer">
+          <button type="button" id="personal-next-btn" onclick="nextOnClick()">Next Step</button>
+        </div>
+      </div>
+
+      <!-- Select plan -->
+      <div class="section" id="select-plan">
+        <div class="section-header" id="select-plan-header">
+          <h2 class="section-title">Select your plan</h2>
+          <p class="section-description color-gray">You have the option of monthly or yearly billing</p>
+        </div>
+        <div class="section-body">
+          <div class="billing-plans" id="billing-plans-monthly">
+            <div class="billing-plan checked">
+              <div class="image-div">
+                <img src="./assets/images/icon-arcade.svg" alt="Picture of arcade">
+              </div>
+              <div class="billing-details">
+                <label for="arcade">Arcade</label>
+                <input class="billing-option" id="arcade" onchange="selectMonthlyBillingOption(event)" type="radio" name="billing-option-monthly" value="arcade-monthly" checked>
+                <div class="base-price">$9/mo</div>
+              </div>
+            </div>
+            <div class="billing-plan">
+              <div class="image-div">
+                <img src="./assets/images/icon-advanced.svg" alt="Picture of advanced option">
+              </div>
+              <div class="billing-details">
+                <label for="advanced">Advanced</label>
+                <input  class="billing-option" id="advanced" onchange="selectMonthlyBillingOption(event)" type="radio" name="billing-option-monthly" value="advanced-monthly">
+                <div class="base-price">$12/mo</div>
+              </div>
+            </div>
+            <div class="billing-plan">
+              <div class="image-div">
+                <img src="./assets/images/icon-pro.svg" alt="Picture of pro option">
+              </div>
+              <div class="billing-details">
+                <label for="pro">Pro</label>
+                <input class="billing-option" id="pro" onchange="selectMonthlyBillingOption(event)" type="radio" name="billing-option-monthly" value="pro-monthly">
+                <div class="base-price-monthly">$15/mo</div>
+              </div>
+            </div>
+          </div>
+          <!-- Yearly billing plans -->
+          <div class="billing-plans hide" id="billing-plans-yearly">
+            <div class="billing-plan checked">
+              <div class="image-div">
+                <img src="./assets/images/icon-arcade.svg" alt="Picture of arcade">
+              </div>
+              <div class="billing-details">
+                <label for="arcade">Arcade</label>
+                <input class="billing-option" id="arcade" onchange="selectYearlyBillingOption(event)" type="radio" name="billing-option-yearly" value="arcade-yearly" checked>
+                <div class="base-price">
+                  $90/yr<br>
+                  <span class="base-price-incentive">2 free months</span>
+                </div>
+              </div>
+            </div>
+            <div class="billing-plan">
+              <div class="image-div">
+                <img src="./assets/images/icon-advanced.svg" alt="Picture of advanced option">
+              </div>
+              <div class="billing-details">
+                <label for="advanced">Advanced</label>
+                <input  class="billing-option" id="advanced" onchange="selectYearlyBillingOption(event)" type="radio" name="billing-option-yearly" value="advanced-yearly">
+                <div class="base-price">
+                  $120<br>
+                  <span class="base-price-incentive">2 free months</span>
+                </div>
+              </div>
+            </div>
+            <div class="billing-plan">
+              <div class="image-div">
+                <img src="./assets/images/icon-pro.svg" alt="Picture of pro option">
+              </div>
+              <div class="billing-details">
+                <label for="pro">Pro</label>
+                <input class="billing-option" id="pro" onchange="selectYearlyBillingOption(event)" type="radio" name="billing-option-yearly" value="pro-yearly">
+                <div class="base-price">
+                  $150/yr<br>
+                  <span class="base-price-incentive">2 months free</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="billing-options">
+            <div class="billing-monthly dark-blue-highlight">Monthly</div>
+            <!-- Monthly-yearly Toggle -->
+            <label class="monthly-yearly-switch">
+              <input type="checkbox" id="monthly-yearly-checkbox" onchange="toggleBillingOptions(event)">
+              <span class="slider round"></span>
+            </label>
+            <!-- End Toggle -->
+            <div class="billing-yearly">Yearly</div>
+          </div>
+        </div>
+        <div class="section-footer">
+          <button type="button" id="select-plan-next" onclick="nextOnClick()">Next Step</button>
+          <button type="button" class="go-back-btn" id="select-plan-go-back" onclick="goBackOnClick()">Go Back</button>
+        </div>
+      </div>
+      <!-- Add-ons -->
+      <div class="section" id="adds-on">
+        <div class="section-header visible" id="add-ons-header">
+          <h1 class="section-title">Pick add-ons</h1>
+          <p class="section-description">Add-ons help enhance your gaming experience</p>
+        </div>
+        <!-- Monthly adds on -->
+        <div class="section-body" id="add-ons-monthly">
+          <div class="add-on">
+            <input type="checkbox" name="adds-ons-monthly" value="online-service-monthly" onchange="selectAddOn(event)">
+            <div class="add-on-info">
+              <div class="add-on-type">Online service</div>
+              <p class="add-on-description">Access to multiplayer games</p>
+            </div>
+            <div class="add-on-price">+$1/mo</div>
+          </div>
+          <div class="add-on">
+            <input type="checkbox" name="adds-ons-monthly" value="larger-storage-monthly" onchange="selectAddOn(event)">
+            <div class="add-on-container">
+              <div class="add-on-type">Larger storage</div>
+              <p class="add-on-description">Extra 1TB of cloud save</p>
+            </div>
+            <div class="add-on-price">+$2/mo</div>
+          </div>
+          <div class="add-on">
+            <input type="checkbox" name="adds-ons-monthly" value="customizable-profile-monthly" onchange="selectAddOn(event)">
+            <div class="add-on-info">
+              <div class="add-on-type">Customizable Profile</div>
+              <p class="add-on-description">Custom theme on your profile</p>
+            </div>
+            <div class="add-on-price">+$2/mo</div>
+          </div>
+        </div>
+        <!-- Yearly add ons -->
+        <div class="section-body hide" id="add-ons-yearly">
+          <div class="add-on">
+            <input type="checkbox" name="adds-ons-yearly" value="online-service-yearly" onchange="selectAddOn(event)">
+            <div class="add-on-info">
+              <div class="add-on-type">Online service</div>
+              <p class="add-on-description">Access to multiplayer games</p>
+            </div>
+            <div class="add-on-price">+$10/yr</div>
+          </div>
+          <div class="add-on">
+            <input type="checkbox" name="adds-ons-yearly" value="larger-storage-yearly" onchange="selectAddOn(event)">
+            <div class="add-on-container">
+              <div class="add-on-type">Larger storage</div>
+              <p class="add-on-description">Extra 1TB of cloud save</p>
+            </div>
+            <div class="add-on-price">+$20/yr</div>
+          </div>
+          <div class="add-on">
+            <input type="checkbox" name="add-ons" name="adds-ons-yearly" value="customizable-profile-yearly" onchange="selectAddOn(event)">
+            <div class="add-on-info">
+              <div class="add-on-type">Customizable Profile</div>
+              <p class="add-on-description">Custom theme on your profile</p>
+            </div>
+            <div class="add-on-price">+$20/yr</div>
+          </div>
+        </div>
+        <div class="section-footer">
+          <button type="button" onclick="nextOnClick()">Next Step</button>
+          <button class="go-back-btn" type="button" onclick="goBackOnClick()">Go Back</button>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="section" id="summary">
+        <div class="section-header" id="summary-header">
+          <h2 class="section-title">Finishing up</h2>
+          <p class="section-description color-gray">Double-check looks OK before confirming</p>
+        </div>
+        <div class="section-body">
+          <!-- Monthly section table -->
+          <div class="section-table" id="summary-table-monthly">
+            <div class="table-row" id="summary-base-plan">
+              <div>
+                <span class="dark-blue-highlight" id="base-plan-monthly-selected">Arcade (Monthly)</span>
+                <br>
+                <span class="change" onclick="changeOnClick()">Change</span>
+              </div>
+              <p id="base-price-monthly-selected" class="dark-blue-highlight">$9/mo</p>
+            </div>
+            <span class="hr-line"></span>
+            <div id="summary-add-ons-monthly">
+              <div class="table-row">
+                <div class="color-gray">Online Service</div>
+                <p class="summary-price">+$1/mo</p>
+              </div>
+              <div class="table-row">
+                <div class="color-gray">Larger Storage</div>
+                <p class="summary-price">+$2/mo</p>
+              </div>
+              <div class="table-row">
+                <div class="color-gray">Customizable Profile</div>
+                <p class="summary-price">+$2/mo</p>
+              </div>
+            </div>
+          </div>
+          <!-- Yearly section table -->
+          <div class="section-table hide" id="summary-table-yearly">
+            <div class="table-row" id="summary-base-plan">
+              <div>
+                <span class="dark-blue-highlight" id="base-plan-yearly-selected">Arcade (Yearly)</span>
+                <br>
+                <span class="change" onclick="changeOnClick()">Change</span>
+              </div>
+              <p id="base-price-yearly-selected" class="dark-blue-highlight">$90/yr</p>
+            </div>
+            <span class="hr-line"></span>
+            <div id="summary-add-ons-yearly">
+              <div class="table-row">
+                <div class="color-gray">Online Service</div>
+                <p class="summary-price">+$10/yr</p>
+              </div>
+              <div class="table-row">
+                <div class="color-gray">Larger Storage</div>
+                <p class="summary-price">+$20/yr</p>
+              </div>
+              <div class="table-row">
+                <div class="color-gray">Customizable Profile</div>
+                <p class="summary-price">+$20/yr</p>
+              </div>
+            </div>
+          </div>
+          <div id="summary-total" class="table-row">
+            <div class="color-gray">Total (per month)</div>
+            <span id="total"></span>
+          </div>
+        </div>
+        <div class="section-footer">
+          <button id="submit" type="submit">Confirm</button>
+          <button class="go-back-btn" type="button" onclick="goBackOnClick()">Go Back</button>
+        </div>
+      </div>
+    </form>
+    <!-- Confirmation message -->
+    <div class="confirmation hide" id="confirmation">
+      <div id="thank-you">
+        <img alt="Check mark" src="./assets/images/icon-thank-you.svg">
+      </div>
+      <h2 class="dark-blue-highlight">Thank you!</h2>
+      <p class="color-gray" id="confirmation-message">Thank you for confirming your subscription. We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com</p>
+    </div>
+  </div>
+</body>
+</html>
